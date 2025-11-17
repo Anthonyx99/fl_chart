@@ -149,7 +149,7 @@ class RenderPieChart extends RenderBaseChart<PieTouchResponse>
   void badgeWidgetPaint(PaintingContext context, Offset offset) {
     RenderObject? child = firstChild;
     var counter = 0;
-    while (child != null) {
+    while (child != null && counter < data.sections.length) {
       final childParentData = child.parentData! as MultiChildLayoutParentData;
       if (data.sections[counter].value > 0) {
         context.paintChild(child, childParentData.offset + offset);
