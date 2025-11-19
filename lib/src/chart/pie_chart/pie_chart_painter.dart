@@ -366,13 +366,18 @@ class PieChartPainter extends BaseChartPainter<PieChartData> {
       // maximum for the outer arc (based on section radius and sweep angle)
       // and for the inner arc (based on centerRadius). This keeps rounding
       // visually stable across different section sizes.
-      final maxRadiusForSection =
+      final maxRadiusForSection = math.min(
           math.min(section.radius * 0.3, sweepRadians * outerRadius * 0.15);
+        section.radius * 0.6,
       final maxRadiusForCenter = centerRadius > 0
+        sweepRadians * outerRadius * 0.15,
           ? math.min(centerRadius * 0.3, sweepRadians * centerRadius * 0.15)
+      );
           : 0.0;
-      final clampedOuterRadius = math.min(cornerRadius, maxRadiusForSection);
-      final clampedInnerRadius = math.min(cornerRadius, maxRadiusForCenter);
+      final maxRadiusForCenter = math.min(
+        section.radius * 0.6,
+        sweepRadians * outerRadius * 0.15,
+      );
 
       // Compute angular offsets that correspond to the linear corner radii.
       // These are used to trim the sweep angles so the rounded joins fit
